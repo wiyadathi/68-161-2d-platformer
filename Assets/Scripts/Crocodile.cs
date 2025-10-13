@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class Crocodile : Enemy
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        
+        base.Initialize(50);
+        DamageHit = 30;
     }
 
-    // Update is called once per frame
+    public override void Behavior()
+    {
+        throw new System.NotImplementedException();
+    }
+
+        // Update is called once per frame
     void Update()
     {
         

@@ -17,6 +17,7 @@ public abstract class Character : MonoBehaviour
     public void Initialize(int startHealth)
     {
         Health = startHealth;
+        Debug.Log($"{this.name} initial Health: {this.Health}.");
 
         //optional: to drag-drop components into the variables in Unity
         anim = GetComponent<Animator>();
@@ -27,7 +28,7 @@ public abstract class Character : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
-        Debug.Log($"{this.name} tool {damage} damage! Current Health: {Health}");
+        Debug.Log($"{this.name} took {damage} damage! Current Health: {Health}");
 
         IsDead();
     }
