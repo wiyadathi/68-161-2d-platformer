@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Crocodile : MonoBehaviour
+public class Crocodile : Enemy
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ant : MonoBehaviour
+public class Ant : Enemy
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

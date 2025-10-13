@@ -12,8 +12,17 @@ public abstract class Character : MonoBehaviour
 
     protected Animator anim;
     protected Rigidbody2D rb;
-    
-    
+
+    //initialize character
+    public void Initialize(int startHealth)
+    {
+        Health = startHealth;
+
+        //optional: to drag-drop components into the variables in Unity
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     //Behavior
     public void TakeDamage(int damage)
     {
