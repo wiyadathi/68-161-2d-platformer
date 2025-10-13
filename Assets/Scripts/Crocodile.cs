@@ -14,9 +14,4 @@ public class Crocodile : Enemy
         throw new System.NotImplementedException();
     }
 
-        // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
