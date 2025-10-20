@@ -21,12 +21,12 @@ public class Player : Character
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        Enemy enemy = other.gameObject.GetComponent<Enemy>();
         if (enemy != null) {
-            Debug.Log($"{this.name} Hit with {enemy.name}!");
             OnHitWith(enemy);
+            Debug.Log($"{this.name} collides with {enemy.name}!");
         }
     }
 }
