@@ -8,3 +8,5 @@ public interface IShootable
     public float WaitTime { get; set; }
     public void Shoot();
 }
+
+

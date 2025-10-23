@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class Crocodile : Enemy
+public class Crocodile : Enemy, IShootable
 {
     [SerializeField] private float atkRange;
     public Player player; //target to atk
+
+    [field: SerializeField] public GameObject Bullet { get ; set ; }
+    [field: SerializeField] public Transform ShootPoint { get ; set ; }
+    public float ReloadTime { get ; set ; }
+    public float WaitTime { get ; set ; }
 
     void Start()
     {
@@ -13,10 +18,15 @@ public class Crocodile : Enemy
         //set atk range and target
         atkRange = 6.0f;
         player = GameObject.FindFirstObjectByType<Player>();
+
+        //set timers variables for throwing rock
+        WaitTime = 0.0f;
+        ReloadTime = 5.0f; //throw Rock every 5 sec
     }
 
     private void FixedUpdate()
     {
+        WaitTime += Time.fixedDeltaTime; //timer
         Behavior();
     }
     public override void Behavior()
@@ -33,6 +43,13 @@ public class Crocodile : Enemy
 
     public void Shoot() 
     {
-        Debug.Log($"{this.name} shoots rock to the {player.name}!");
+        if (WaitTime >= ReloadTime)
+        {
+            anim.SetTrigger("Shoot"); //call Shoot animation
+            var bullet = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
+            Rock rock = bullet.GetComponent<Rock>();
+            rock.InitWeapon(30, this);
+            WaitTime = 0;
+        }
     }
 }

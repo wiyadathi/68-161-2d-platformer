@@ -15,12 +15,11 @@ public class Player : Character, IShootable
         base.Initialize(100); //set Player's Health
         ReloadTime = 1.0f;
         WaitTime = 0.0f;
-
     }
 
     private void FixedUpdate() //loop every 0.02 sec
     {
-        WaitTime += Time.fixedDeltaTime; // = 0 + 0.02 + 0.02 +...
+        WaitTime += Time.fixedDeltaTime; // timer = 0 + 0.02 + 0.02 +...
     }
 
     private void Update()
