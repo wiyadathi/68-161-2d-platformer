@@ -1,24 +1,49 @@
+using System;
 using UnityEngine;
 
-public class Player : Character
+public class Player : Character, IShootable
 {
-    //no additional attributes, use Base class attributes
+    //implement interface using auto property
+    [field: SerializeField] public GameObject Bullet { get ; set ; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [field: SerializeField] public Transform ShootPoint { get; set ; }
+    [field: SerializeField] public float ReloadTime { get; set; }
+    [field: SerializeField] public float WaitTime { get; set; }
+
     void Start()
     {
         base.Initialize(100); //set Player's Health
+        ReloadTime = 1.0f;
+        WaitTime = 0.0f;
+
+    }
+
+    private void FixedUpdate() //loop every 0.02 sec
+    {
+        WaitTime += Time.fixedDeltaTime; // = 0 + 0.02 + 0.02 +...
+    }
+
+    private void Update()
+    {
+        Shoot();
+    }
+
+    public void Shoot()
+    {
+        if ( Input.GetButtonDown("Fire1") && WaitTime >= ReloadTime )
+        {
+            var bullet = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
+            Banana banana = bullet.GetComponent<Banana>();
+            if ( banana != null )
+                banana.InitWeapon(20, this); 
+
+            WaitTime = 0.0f; //reset waitTime
+        }
     }
 
     public void OnHitWith(Enemy enemy)
     {
         TakeDamage(enemy.DamageHit);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -29,4 +54,5 @@ public class Player : Character
             Debug.Log($"{this.name} collides with {enemy.name}!");
         }
     }
+
 }
